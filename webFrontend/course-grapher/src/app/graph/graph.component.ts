@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import mermaid from 'mermaid';
 import { CoursesService } from '../courses.service';
 import { Course } from '../course';
@@ -12,6 +12,7 @@ import { Course } from '../course';
 })
 export class GraphComponent {
 
+	@Input() endCourse:string = '';
 	coursesService = inject(CoursesService); 
 	flowChart: any;
 	stringFlowChart: string = "";
@@ -19,16 +20,26 @@ export class GraphComponent {
 		this.createFlowchart();
 	}
 	ngOnInit(): void {
-		mermaid.initialize({});
+		window.nodeCallback = (id:string) => {
+			console.log(id);
+		}
+		mermaid.initialize({
+			startOnLoad: true,
+			flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'cardinal' },
+			securityLevel: 'loose',
+	  });
 	}
+
 	createFlowchart() {
+		
 		this.flowChart = ["graph LR"];
 		let courses: Course[] = this.coursesService.getCourses();
 		for(let i:number = 0; i < courses.length; ++i){
-			this.flowChart.push("id"+courses[i].id.toString() + "[" + courses[i].name + "]"); // create block and attach id
+			this.flowChart.push("id"+courses[i].id + "[" + courses[i].name + "]"); // create block and attach id
 			for(let j:number = 0; j < courses[i].prerequisites.length; ++j){
-				this.flowChart.push("id" + courses[i].prerequisites[j].toString() + "-->" + "id" + courses[i].id.toString()); // add all prerequisites
+				this.flowChart.push("id" + courses[i].prerequisites[j] + "-->" + "id" + courses[i].id); // add all prerequisites
 			}
+			this.flowChart.push("click id" + courses[i].id + " nodeCallback");
 		}
 		// this.flowChart = [
 		// 	"graph LR",
@@ -45,5 +56,6 @@ export class GraphComponent {
 		// 	"ida23s[Start] --> id10[Ques 1]",
 		// ];
 		this.stringFlowChart = this.flowChart.join("\n");
+		console.log(this.stringFlowChart);
 	}
 }

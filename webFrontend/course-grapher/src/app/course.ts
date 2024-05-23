@@ -1,13 +1,15 @@
 export class Course {
-    prerequisites: number[] = [];
-    id: number;
+    prerequisites: string[] = [];
+    id: string;
     name: string | undefined;
+    taken: boolean = false;
 
 
-    constructor(id:number, name:string, prerequisites: number[]){
+    constructor(id:string, name:string, prerequisites: string[], taken:boolean = false){
         this.id = id;
         this.name = name; 
         this.prerequisites = prerequisites;
+        this.taken = taken;
     }
 
 }
