@@ -11,15 +11,16 @@ import { Course } from '../course';
   styleUrl: './graph.component.css'
 })
 export class GraphComponent {
-
 	@Input() endCourse:string = '';
+	
 	coursesService = inject(CoursesService); 
 	flowChart: any;
 	stringFlowChart: string = "";
 	constructor() {
-		this.createFlowchart();
+		// this.createFlowchart();
 	}
 	ngOnInit(): void {
+		console.log("initing");
 		window.nodeCallback = (id:string) => {
 			console.log(id);
 		}
@@ -29,11 +30,16 @@ export class GraphComponent {
 			securityLevel: 'loose',
 	  });
 	}
+	ngOnChanges(changes:any){
+		console.log(changes);
+		this.createFlowchart();
+	}
+
 
 	createFlowchart() {
 		
 		this.flowChart = ["graph LR"];
-		let courses: Course[] = this.coursesService.getCourses();
+		let courses: Course[] = this.coursesService.getCourses(this.endCourse);
 		for(let i:number = 0; i < courses.length; ++i){
 			this.flowChart.push("id"+courses[i].id + "[" + courses[i].name + "]"); // create block and attach id
 			for(let j:number = 0; j < courses[i].prerequisites.length; ++j){
