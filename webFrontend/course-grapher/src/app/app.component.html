@@ -178,14 +178,9 @@
 </style>
 
 <main class="main">
-  <select #selectElem [ngModel]="courses" (change)="onChange(selectElem.value)"> 
-    @for (course of courses; track course){
-      <option>{{course}}</option>
-    }
-  </select>
-  <div style="border: 1px solid black; margin-top: 100px; width: 100%;">
-    <app-graph endCourse = {{selectedCourse}}/>
-  </div>
+    <div style="border: 1px solid black; margin-top: 100px; width: 100%;">
+        <app-graph/>
+    </div>
 </main>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
