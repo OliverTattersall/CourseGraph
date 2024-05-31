@@ -1,7 +1,13 @@
 <div>
+    <select #selectElem [ngModel]="courseNames" (change)="onSelectChange(selectElem.value, graphDiv)"> 
+        @for (course of courseNames; track course){
+            <option value={{course}}>{{course}}</option>
+        }
+    </select>
     <p>End course: {{endCourse}}</p>
-    <pre class="mermaid">
+    <p style="display: none;">{{stringFlowChart}}</p>
+    <pre #graphDiv class="mermaid" id="mermaid">
         {{stringFlowChart}}
-     </pre>
+    </pre>
 </div>
 
