@@ -20,7 +20,7 @@ export class GraphComponent {
 	endCourse:string = '';
 	
 
-	courseNames:string[] = ["PHYS 349", "PHYS 249"];
+	courseNames:string[] = this.coursesService.getCourseNameList();
 	
 	htmlString:string = "";
 	bindFunctions?: ((el:Element) => any | undefined);
