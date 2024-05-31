@@ -39,6 +39,11 @@ export class CoursesService {
         // this.courses.push( new Course("PHYS349", "PHYS 349", [["PHYS234"], ["PHYS249"], ["PHYS242"], ["AMATH271", "PHYS263"]]));
     }
 
+
+    getCourseNameList(): string []{
+        return Object.keys(this.courses);
+    }
+
     getCourses(endCourseId:string): Course[] { // could also do user course cleaning here
         if(endCourseId == ''){
             return [];
@@ -80,7 +85,7 @@ export class CoursesService {
             courseSet.add(curCourse);
 
         }
-        console.log(tempCourses);
+        // console.log(tempCourses);
         return res;
     }
 
