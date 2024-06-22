@@ -1,4 +1,6 @@
 const puppeteer = require('puppeteer');
+const fs = require('fs');
+
 const baseUrl = 'https://uwaterloo.ca/academic-calendar/undergraduate-studies/catalog#/courses';
 
 
@@ -47,13 +49,6 @@ const scrapeCoursePage = async (page) => {
     const descriptionDiv = await page.waitForSelector('h3 ::-p-text(Description) + div');
     const description = await page.evaluate((descDiv => descDiv.innerText), descriptionDiv);
 
-    // Find the prereqs div
-    const prereqsListDiv = await page.waitForSelector('h3 ::-p-text(Prerequisites) + div');
-    const prereqList = await prereqsListDiv.$('li');
-    
-    // TODO: fix tree parsing
-    // let prereqTree = await makeListIntoTree(page, prereqList);
-
     const course = {};
 
     course['code'] = courseCode;
@@ -62,13 +57,45 @@ const scrapeCoursePage = async (page) => {
     course['name'] = name;
     course['description'] = description;
 
+    // Find the prereqs div
+    const prereqsListDiv = await page.$('h3 ::-p-text(Prerequisites) + div');
+    if (!!prereqsListDiv) {
+        const prereqList = await prereqsListDiv.$('li');
+        const prereqHtml = await page.evaluate(prereqList => prereqList.innerHTML, prereqList);
+        course['prereqHtml'] = prereqHtml;
+    }
+
+    // Find the antireqs div
+    const antireqsListDiv = await page.$('h3 ::-p-text(Antirequisites) + div');
+    if (!!antireqsListDiv) {
+        const antireqList = await antireqsListDiv.$('li');
+        const antireqHtml = await page.evaluate(antireqList => antireqList.innerHTML, antireqList);
+        course['antireqHtml'] = antireqHtml;
+    }
+
+    // Find the coreqs div
+    const coreqsListDiv = await page.$('h3 ::-p-text(Corequisites) + div');
+    if (!!coreqsListDiv) {
+        const coreqList = await coreqsListDiv.$('li');
+        const coreqHtml = await page.evaluate(coreqList => coreqList.innerHTML, coreqList);
+        course['coreqHtml'] = coreqHtml;
+    }
+    
+    // TODO: fix tree parsing
+    // let prereqTree = await makeListIntoTree(page, prereqList);
+
     return course;
 }
 
+/**
+ * Scrapes the course from the UW undergraduate calendar.
+ * @param {string} courseCode 
+ * @returns JSON object that represents the course
+ */
 const scrapeCourse = async (courseCode) => {
-    const len = courseCode.length;
-    const faculty = courseCode.substring(0, len - 3).toUpperCase();
-    const courseNumber = Number(courseCode.substring(len - 3));
+    const courseRegex = courseCode.match('(\\D+)(\\d+.*)');
+    const faculty = courseRegex[1].toUpperCase();
+    const courseNumber = courseRegex[2].toUpperCase();
     const humanCode = `${faculty} ${courseNumber}`;
 
     const browser = await puppeteer.launch({
@@ -99,7 +126,10 @@ const scrapeCourse = async (courseCode) => {
     // course['antireqs'] = ;
     course['updatedAt'] = new Date();
 
-    console.log(course);
+    // Close the browser
+    await browser.close();
+
+    return course;
 
     // code: string;            done
     // faculty?: string;        done
@@ -113,9 +143,32 @@ const scrapeCourse = async (courseCode) => {
     // useful?: number;
     // easy?: number;
     // updatedAt?: Date;        done
-
-    // Close the browser
-    await browser.close();
 }
 
-scrapeCourse('cs241');
+const saveAndScrape = async () => {
+    const coursesToScrape = ['cs241', 'cs136l', 'math136'];
+    let data = {}
+
+    for (let i = 0; i < coursesToScrape.length; i++) {
+        const courseCode = coursesToScrape[i];
+        data[courseCode] = await scrapeCourse(courseCode);
+    }
+    
+    // Convert the JSON object to a string
+    const jsonString = JSON.stringify(data, null, 2);
+    
+    // Define the file path
+    const filePath = './courses.json';
+    
+    // Write the JSON string to a file
+    fs.writeFile(filePath, jsonString, (err) => {
+        if (err) {
+            console.error('Error writing to file', err);
+        } else {
+            console.log('JSON data saved to file');
+        }
+    });
+}
+
+
+saveAndScrape();
