@@ -4,25 +4,43 @@ const fs = require('fs');
 const baseUrl = 'https://uwaterloo.ca/academic-calendar/undergraduate-studies/catalog#/courses';
 
 
-// TODO: fix tree parsing
-const makeListIntoTree = async (page, prereqList) => {
+
+
+/**
+ * 
+ * @param {puppeteer.Page} page 
+ * @param {puppeteer.ElementHandle<Element> | null} prereqList 
+ * @returns 
+ */
+const makeListItemIntoTree = async (page, prereqList) => {
     let innerText = "" + await page.evaluate(prereqList => prereqList.innerText, prereqList);
-    console.log(innerText);
     if (innerText == null) return null;
 
-    const matches = innerText.match('.+following')
+    // Figure out if there are any sub-lists
+    // TODO: get a better regex for antireq list declarations
+    const matches = innerText.match('(.+following)|(.+:\\s*)')
 
+    // If no sub-lists, return true
     if (!matches || matches.length == 0) {
+        // Check if it is a course
+        const regexTitle = innerText.match('(.+) - .+');
+        if (regexTitle) return regexTitle[1];
         return innerText;
     }
 
-
-    const nextListItems = await prereqList.$$('li');
+    // Get the list items that are children of the next unordered list
+    const subList = await prereqList.$('ul');
+    await page.evaluate(subList => subList.setAttribute('class', 'processed'), subList);
+    const nextListItems = await prereqList.$$('.processed > li');
+    const parentedNextListIems = await prereqList.$$('.processed > div > li');
     
     const stepReqs = [];
-    for (let i = 0; i < nextListItems.length; i++) {
-        const nextListItem = nextListItems[i];
-        const req = await makeListIntoTree(page, nextListItem);
+    for (const nextListItem of parentedNextListIems) {
+        const req = await makeListItemIntoTree(page, nextListItem);
+        if (!!req) stepReqs.push(req);
+    }
+    for (const nextListItem of nextListItems) {
+        const req = await makeListItemIntoTree(page, nextListItem);
         if (!!req) stepReqs.push(req);
     }
 
@@ -32,6 +50,11 @@ const makeListIntoTree = async (page, prereqList) => {
     return tree;
 }
 
+/**
+ * Scrapes a course's page.
+ * @param {puppeteer.Page} page 
+ * @returns 
+ */
 const scrapeCoursePage = async (page) => {
     // Find the course name
     const titleRef = await page.waitForSelector('h2 ::-p-text( - )');
@@ -63,6 +86,9 @@ const scrapeCoursePage = async (page) => {
         const prereqList = await prereqsListDiv.$('li');
         const prereqHtml = await page.evaluate(prereqList => prereqList.innerHTML, prereqList);
         course['prereqHtml'] = prereqHtml;
+
+        let prereqTree = await makeListItemIntoTree(page, prereqList);
+        course['prereqs'] = prereqTree;
     }
 
     // Find the antireqs div
@@ -71,6 +97,9 @@ const scrapeCoursePage = async (page) => {
         const antireqList = await antireqsListDiv.$('li');
         const antireqHtml = await page.evaluate(antireqList => antireqList.innerHTML, antireqList);
         course['antireqHtml'] = antireqHtml;
+
+        let antireqTree = await makeListItemIntoTree(page, antireqList);
+        course['antireqs'] = antireqTree;
     }
 
     // Find the coreqs div
@@ -79,10 +108,10 @@ const scrapeCoursePage = async (page) => {
         const coreqList = await coreqsListDiv.$('li');
         const coreqHtml = await page.evaluate(coreqList => coreqList.innerHTML, coreqList);
         course['coreqHtml'] = coreqHtml;
+
+        let coreqTree = await makeListItemIntoTree(page, coreqList);
+        course['coreqs'] = coreqTree;
     }
-    
-    // TODO: fix tree parsing
-    // let prereqTree = await makeListIntoTree(page, prereqList);
 
     return course;
 }
@@ -101,6 +130,7 @@ const scrapeCourse = async (courseCode) => {
     const browser = await puppeteer.launch({
         headless: false,
         defaultViewport: null,
+        slowMo: 75, 
     });
 
     // Open a new page
@@ -120,29 +150,54 @@ const scrapeCourse = async (courseCode) => {
 
     const course = await scrapeCoursePage(page);
     
-    // course['prereqTree'] = prereqTree;
-    // course['antireqTree'] = ;
-    // course['prereqs'] = ;
-    // course['antireqs'] = ;
     course['updatedAt'] = new Date();
 
     // Close the browser
     await browser.close();
 
     return course;
+}
 
-    // code: string;            done
-    // faculty?: string;        done
-    // classNumber?: number;    done
-    // name: string;            done
-    // prereqsRaw?: string;
-    // prereqs?: string;
-    // antireqs?: string;
-    // antireqsRaw?: string;
-    // ratings?: number;
-    // useful?: number;
-    // easy?: number;
-    // updatedAt?: Date;        done
+
+// TODO: incomplete method
+/**
+ * Scrapes all of the courses from a specified faculty from the UW undergraduate calendar.
+ * @param {puppeteer.Browser} browser
+ * @param {string} faculty 
+ * @returns JSON object that represents the course
+ */
+const scrapeFaculty = async (browser, faculty) => {
+    const faculty = courseRegex[1].toUpperCase();
+
+    // Open a new page
+    const page = await browser.newPage();
+
+    await page.goto(baseUrl, {
+        waitUntil: "domcontentloaded",
+    });
+
+    // Click on the faculty accordion
+    const facultyCourses = await page.waitForSelector(`h2 ::-p-text((${faculty}))`);
+    await facultyCourses.click();
+
+    // Click into the course page
+    await page.waitForSelector(`a ::-p-text(${courseCode.toUpperCase()} - )`);
+    const courseLinks = page.$$(`a ::-p-text( - )`);
+
+    const data = {};
+    for (const courseLink of courseLinks) {
+        await courseLink.click();
+
+        const course = await scrapeCoursePage(page);
+        
+        course['updatedAt'] = new Date();
+        data[course['code']] = course;
+    }
+
+    // Close the browser
+    await browser.close();
+
+    data[course['code']] = course;
 }
 
 const saveAndScrape = async () => {

@@ -6,8 +6,53 @@
     "name": "Foundations of Sequential Programs",
     "description": "The relationship between high-level languages and the computer architecture that underlies their implementation, including basic machine architecture, assemblers, specification and translation of programming languages, linkers and loaders, block-structured languages, parameter passing mechanisms, and comparison of programming languages.",
     "prereqHtml": "<span>Complete all of the following</span><ul><div><span></span><li><span>Complete 1 of the following</span><ul><li data-test=\"ruleView-B.1\"><div data-test=\"ruleView-B.1-result\">Must have completed the following: <div><ul style=\"margin-top: 5px; margin-bottom: 5px;\"><li><span><a href=\"#/courses/view/65b267bd23cba719b1479aa2\">CS138</a> - Introduction to Data Abstraction and Implementation <span style=\"margin-left: 5px;\">(0.50)</span></span></li></ul></div></div></li><div><span></span><li><span>Complete all of the following</span><ul><li data-test=\"ruleView-B.2.1\"><div data-test=\"ruleView-B.2.1-result\">Must have completed the following: <div><ul style=\"margin-top: 5px; margin-bottom: 5px;\"><li><span><a href=\"#/courses/view/660d9e053123427965b7e67f\">CS136L</a> - Tools and Techniques for Software Development <span style=\"margin-left: 5px;\">(0.25)</span></span></li></ul></div></div></li><li data-test=\"ruleView-B.2.2\"><div data-test=\"ruleView-B.2.2-result\">Earned a minimum grade of <span>85%</span> in at least <span>1</span> of the following: <div><ul style=\"margin-top: 5px; margin-bottom: 5px;\"><li><span><a href=\"#/courses/view/660d9c17b1162880b0f9ec9b\">CS136</a> - Elementary Algorithm Design and Data Abstraction <span style=\"margin-left: 5px;\">(0.50)</span></span></li><li><span><a href=\"#/courses/view/65b2689c7786302cf67fd926\">CS146</a> - Elementary Algorithm Design and Data Abstraction (Advanced Level) <span style=\"margin-left: 5px;\">(0.50)</span></span></li></ul></div></div></li></ul></li></div><div><span></span><li><span>Complete all of the following</span><ul><li data-test=\"ruleView-A.1\"><div data-test=\"ruleView-A.1-result\">Must have completed the following: <div><ul style=\"margin-top: 5px; margin-bottom: 5px;\"><li><span><a href=\"#/courses/view/660d9e053123427965b7e67f\">CS136L</a> - Tools and Techniques for Software Development <span style=\"margin-left: 5px;\">(0.25)</span></span></li></ul></div></div></li><li data-test=\"ruleView-A.2\"><div data-test=\"ruleView-A.2-result\">Must have completed at least <span>1</span> of the following: <div><ul style=\"margin-top: 5px; margin-bottom: 5px;\"><li><span><a href=\"#/courses/view/6626b3b7466ac1ff2ccb47a9\">CS246</a> - Object-Oriented Software Development <span style=\"margin-left: 5px;\">(0.50)</span></span></li><li><span><a href=\"#/courses/view/65b2825d98f0449e3d101116\">CS246E</a> - Object-Oriented Software Development (Enriched) <span style=\"margin-left: 5px;\">(0.50)</span></span></li></ul></div></div></li></ul></li></div></ul></li></div><li data-test=\"ruleView-A\"><div data-test=\"ruleView-A-result\">Enrolled in <span><a href=\"#/programs/view/65f099a0018b1a3bdecd47d1\">H-BBA &amp; BCS Double Degree</a>, <a href=\"#/programs/view/65ea084cf40b273115278dbf\">H-Computer Science (BCS)</a>, <a href=\"#/programs/view/64d14edf2cdcdf6d23742139\">H-Computer Science (BMath)</a>, <a href=\"#/programs/view/65f8f8413123426ee9b75798\">JH-Computer Science (BCS)</a>, <a href=\"#/programs/view/65f8fc16bca656d6794aa356\">JH-Computer Science (BMath)</a>, <a href=\"#/programs/view/65f0686b8cab50e8e0300a51\">H-Computing &amp; Financial Management</a>, <a href=\"#/programs/view/65f4618c3c734a06467ad707\">H-Data Science (BCS)</a>, <a href=\"#/programs/view/65e75634d3ef752d7fb1413c\">H-Data Science (BMath)</a>, or <a href=\"#/programs/view/6613f3f753b28f5b2b24c6af\">H-Software Engineering</a></span></div></li></ul>",
+    "prereqs": {
+      "Complete all of the following": [
+        {
+          "Complete 1 of the following": [
+            {
+              "Complete all of the following": [
+                {
+                  "Must have completed the following": [
+                    "CS136L"
+                  ]
+                },
+                {
+                  "Earned a minimum grade of 85% in at least 1 of the following": [
+                    "CS136",
+                    "CS146"
+                  ]
+                }
+              ]
+            },
+            {
+              "Complete all of the following": [
+                {
+                  "Must have completed the following": [
+                    "CS136L"
+                  ]
+                },
+                {
+                  "Must have completed at least 1 of the following": [
+                    "CS246",
+                    "CS246E"
+                  ]
+                }
+              ]
+            },
+            {
+              "Must have completed the following": [
+                "CS138"
+              ]
+            }
+          ]
+        },
+        "Enrolled in H-BBA & BCS Double Degree, H-Computer Science (BCS), H-Computer Science (BMath), JH-Computer Science (BCS), JH-Computer Science (BMath), H-Computing & Financial Management, H-Data Science (BCS), H-Data Science (BMath), or H-Software Engineering"
+      ]
+    },
     "antireqHtml": "<div data-test=\"ruleView-A-result\">Not completed nor concurrently enrolled in: <div><ul style=\"margin-top: 5px; margin-bottom: 5px;\"><li><span><a href=\"#/courses/view/660da3ceb11628217cf9ecda\">CS230</a> - Introduction to Computers and Computer Systems <span style=\"margin-left: 5px;\">(0.50)</span></span></li><li><span><a href=\"#/courses/view/6627d8fc2197737227cc4903\">CS241E</a> - Foundations of Sequential Programs (Enriched) <span style=\"margin-left: 5px;\">(0.50)</span></span></li><li><span><a href=\"#/courses/view/65ce3884d3ef75676db0810b\">ECE351</a> - Compilers <span style=\"margin-left: 5px;\">(0.50)</span></span></li></ul></div></div>",
-    "updatedAt": "2024-06-22T20:11:59.978Z"
+    "antireqs": "CS230",
+    "updatedAt": "2024-06-22T21:57:39.684Z"
   },
   "cs136l": {
     "code": "CS136L",
@@ -16,8 +61,38 @@
     "name": "Tools and Techniques for Software Development",
     "description": "This course introduces students to tools and techniques useful in the software development lifecycle. Students learn to navigate and leverage commands and utilities in the Linux Command Line Shell. Students gain experience in version control software, writing scripts to automate tasks, and creating effective test cases to identify bugs. Tracing and debugging strategies are discussed. Students also gain experience in using built-in support for version control, testing, debugging, build automation, etc. in integrated development environments (IDEs).",
     "prereqHtml": "<span>Complete 1 of the following</span><ul><li data-test=\"ruleView-A\"><div data-test=\"ruleView-A-result\">Earned a minimum grade of <span>90%</span> in each of the following: <div><ul style=\"margin-top: 5px; margin-bottom: 5px;\"><li><span><a href=\"#/courses/view/6626b944219773bd48cc42a7\">CS115</a> - Introduction to Computer Science 1 <span style=\"margin-left: 5px;\">(0.50)</span></span></li></ul></div></div></li><li data-test=\"ruleView-B\"><div data-test=\"ruleView-B-result\">Earned a minimum grade of <span>70%</span> in each of the following: <div><ul style=\"margin-top: 5px; margin-bottom: 5px;\"><li><span><a href=\"#/courses/view/65ce382ab406400344dddfc6\">CS116</a> - Introduction to Computer Science 2 <span style=\"margin-left: 5px;\">(0.50)</span></span></li></ul></div></div></li><li data-test=\"ruleView-C\"><div data-test=\"ruleView-C-result\">Earned a minimum grade of <span>60%</span> in at least <span>1</span> of the following: <div><ul style=\"margin-top: 5px; margin-bottom: 5px;\"><li><span><a href=\"#/courses/view/660d9b8392fd7f4b720e1902\">CS135</a> - Designing Functional Programs <span style=\"margin-left: 5px;\">(0.50)</span></span></li></ul></div></div></li><li data-test=\"ruleView-D\"><div data-test=\"ruleView-D-result\">Must have completed the following: <div><ul style=\"margin-top: 5px; margin-bottom: 5px;\"><li><span><a href=\"#/courses/view/65b2682e77863038b87fd91c\">CS145</a> - Designing Functional Programs (Advanced Level) <span style=\"margin-left: 5px;\">(0.50)</span></span></li></ul></div></div></li></ul>",
+    "prereqs": {
+      "Complete 1 of the following": [
+        {
+          "Earned a minimum grade of 90% in each of the following": [
+            "CS115"
+          ]
+        },
+        {
+          "Earned a minimum grade of 70% in each of the following": [
+            "CS116"
+          ]
+        },
+        {
+          "Earned a minimum grade of 60% in at least 1 of the following": [
+            "CS135"
+          ]
+        },
+        {
+          "Must have completed the following": [
+            "CS145"
+          ]
+        }
+      ]
+    },
     "coreqHtml": "<div data-test=\"ruleView-A-result\">Completed or concurrently enrolled in at least <span>1</span> of the following: <div><ul style=\"margin-top: 5px; margin-bottom: 5px;\"><li><span><a href=\"#/courses/view/660d9c17b1162880b0f9ec9b\">CS136</a> - Elementary Algorithm Design and Data Abstraction <span style=\"margin-left: 5px;\">(0.50)</span></span></li><li><span><a href=\"#/courses/view/65b2689c7786302cf67fd926\">CS146</a> - Elementary Algorithm Design and Data Abstraction (Advanced Level) <span style=\"margin-left: 5px;\">(0.50)</span></span></li></ul></div></div>",
-    "updatedAt": "2024-06-22T20:12:03.994Z"
+    "coreqs": {
+      "Completed or concurrently enrolled in at least 1 of the following": [
+        "CS136",
+        "CS146"
+      ]
+    },
+    "updatedAt": "2024-06-22T21:58:00.944Z"
   },
   "math136": {
     "code": "MATH136",
@@ -26,7 +101,32 @@
     "name": "Linear Algebra 1 for Honours Mathematics",
     "description": "Systems of linear equations, matrix algebra, elementary matrices, computational issues. Real n-space, vector spaces and subspaces, basis and dimension, rank of a matrix, linear transformations, and matrix representations. Determinants, eigenvalues and diagonalization, applications.",
     "prereqHtml": "<span>Complete 1 of the following</span><ul><div><span></span><li><span>Complete all of the following</span><ul><div><span></span><li><span>Complete 1 of the following</span><ul><li data-test=\"ruleView-A.1.3\"><div data-test=\"ruleView-A.1.3-result\">Must have completed the following: <div><ul style=\"margin-top: 5px; margin-bottom: 5px;\"><li><span><a href=\"#/courses/view/65b532596cd5890a50e8ef1e\">MATH145</a> - Algebra (Advanced Level) <span style=\"margin-left: 5px;\">(0.50)</span></span></li></ul></div></div></li><li data-test=\"ruleView-A.1.1\"><div data-test=\"ruleView-A.1.1-result\">Earned a minimum grade of <span>60%</span> in each of the following: <div><ul style=\"margin-top: 5px; margin-bottom: 5px;\"><li><span><a href=\"#/courses/view/65b90fba98f044dc151034a8\">MATH135</a> - Algebra for Honours Mathematics <span style=\"margin-left: 5px;\">(0.50)</span></span></li></ul></div></div></li></ul></li></div><li data-test=\"ruleView-A.1\"><div data-test=\"ruleView-A.1-result\"><div>Enrolled in an Honours Mathematics program or Mathematics/BASE</div></div></li></ul></li></div><li data-test=\"ruleView-B\"><div data-test=\"ruleView-B-result\">Enrolled in <span><a href=\"#/programs/view/65f83ada3c734a5fac7ae9b1\">H-Mathematical Physics (BSc)</a></span></div></li></ul>",
+    "prereqs": {
+      "Complete 1 of the following": [
+        {
+          "Complete all of the following": [
+            {
+              "Complete 1 of the following": [
+                {
+                  "Must have completed the following": [
+                    "MATH145"
+                  ]
+                },
+                {
+                  "Earned a minimum grade of 60% in each of the following": [
+                    "MATH135"
+                  ]
+                }
+              ]
+            },
+            "Enrolled in an Honours Mathematics program or Mathematics/BASE"
+          ]
+        },
+        "Enrolled in H-Mathematical Physics (BSc)"
+      ]
+    },
     "antireqHtml": "<div data-test=\"ruleView-A-result\">Not completed nor concurrently enrolled in: <div><ul style=\"margin-top: 5px; margin-bottom: 5px;\"><li><span><a href=\"#/courses/view/65b90528f81cd8a84113167d\">MATH106</a> - Applied Linear Algebra 1 <span style=\"margin-left: 5px;\">(0.50)</span></span></li><li><span><a href=\"#/courses/view/65b905a35f44041eaff296d1\">MATH114</a> - Linear Algebra for Science <span style=\"margin-left: 5px;\">(0.50)</span></span></li><li><span><a href=\"#/courses/view/65b90628b44f43033f69e76a\">MATH115</a> - Linear Algebra for Engineering <span style=\"margin-left: 5px;\">(0.50)</span></span></li><li><span><a href=\"#/courses/view/65b5329e98f0445a65101f57\">MATH146</a> - Linear Algebra 1 (Advanced Level) <span style=\"margin-left: 5px;\">(0.50)</span></span></li><li><span><a href=\"#/courses/view/65cd3250e98bac4bc93eff57\">NE112</a> - Linear Algebra for Nanotechnology Engineers <span style=\"margin-left: 5px;\">(0.50)</span></span></li></ul></div></div>",
-    "updatedAt": "2024-06-22T20:12:07.961Z"
+    "antireqs": "MATH106",
+    "updatedAt": "2024-06-22T21:58:20.950Z"
   }
 }
