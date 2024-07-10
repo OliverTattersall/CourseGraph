@@ -1,5 +1,6 @@
 <div>
-    <select #selectElem [ngModel]="courseNames" (change)="onSelectChange(selectElem.value, graphDiv)"> 
+    <select #selectElem [ngModel]="courseNames" (change)="onSelectChange(selectElem.value, graphDiv)" 
+        class="border-2 border-black rounded-md"> 
         @for (course of courseNames; track course){
             <option value={{course}}>{{course}}</option>
         }

@@ -1,0 +1,45 @@
+<!-- <p>autocomplete works!</p> -->
+<!-- <input id="autoInput" #autoCompleteSearchInput placeholder="Search {{title}} By Name" type="text" autocomplete="off"> -->
+
+<button class="block w-full focus:outline-none p-6 bg-white border rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" #autoCompleteWrapper onclick="">
+    <div class="label">
+      <label for="value">Search {{title}}:</label>
+    </div>
+    <div>
+        <input 
+            class="text-lg bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            id="autoInput" #autoCompleteSearchInput 
+            placeholder="Search {{title}} By Name" 
+            type="text" autocomplete="off"
+        >
+    </div>
+    
+    <!--  DropDown Starts  -->
+      <div class="card" [hidden]="!showSearches">
+        <div class="search">
+            @if(showDropdown){
+                @for(value of searchedValues; track $index){
+                    <div>
+                        <button
+                            class = "w-full focus:outline p-2 mt-2 bg-white border rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                            tappable (click)="setValueName(value)" 
+                        >
+                            {{value}} 
+                        </button>
+                    </div>
+                    
+                }
+            }
+          <!-- <div *ngFor="let value of searchedValues; trackBy: trackById" tappable (click)="setValueName(value)" class="search-result">
+              {{value}}
+          </div>      -->
+        </div>
+        @if(searchedValues && searchedValues.length <= 0 && !isSearching){
+            <p class="search">No Value found</p>
+        }
+        <!-- <p class="search" *ngIf="searchedValues && searchedValues.length <= 0 && !isSearching">No Car found</p> -->
+        <p class="search" [hidden]="!isSearching">Searching values...</p>
+      </div>
+  <!--  DropDown Ends  -->
+    
+</button>
