@@ -1,0 +1,28 @@
+<!-- <p>register-info-page works!</p> -->
+
+<div class="flex">
+    <div class="flex-1">
+        <h4 class="flex">Selected courses:  </h4>
+        @for(course of addedCourses; track course){
+            <div class="inline-block mr-3 ml-1 shadow p-1 hover:shadow-lg">
+                <p class="inline-block">{{course}}</p>
+                <div class="inline-block">
+                    <app-closebutton [closeAction]="removeCourseFromListFunction(course)" (emiter)="removeCourseFromList($event)"/>
+                </div>
+                
+            </div>
+        }
+        <div>
+            <button class="p-4 mt-4 shadow bg-green-400 rounded-lg" (click)="submitInfo()">Finish</button>
+        </div>
+        
+    </div>
+
+    <div class="flex" style="flex: 3;">
+        <div style="flex: 1;"></div>
+        <div class="w-fit" style="flex: 3;">
+            <app-autocomplete [acceptValues]="data" [title] = "title" (setValueEvent) = "handleAutoCompleteEvent($event)" />
+        </div>
+        <div  style="flex: 3;"></div>
+    </div>
+</div>
